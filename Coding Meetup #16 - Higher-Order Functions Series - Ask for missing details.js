@@ -15,6 +15,8 @@ write a function that
 1) adds the question property to each object in the input array where the developer has not provided the relevant
 details (marked with a null value). The value of the question property should be the following string:
 
+2) and returns only the developers with missing details:
+
 Hi, could you please provide your <property name>.
 
 */
