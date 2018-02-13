@@ -1,32 +1,40 @@
 /* 
-  The goal of this exercise is to convert a string to a new string where each
-  character in the new string is '(' if that character appears only once in the original string, or ')' if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs
+from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers,
+he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number.
 
-Examples:
+! Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)
 
-"din" => "((("
+##Examples :
 
-"recede" => "()()()"
+iqTest("2 4 7 8 10") => 3 // Third number is odd, while the rest of the numbers are even
 
-"Success" => ")())())"
+iqTest("1 2 1 1") => 2 // Second number is even, while the rest of the numbers are odd
 
-"(( @" => "))((" 
 */
 
 
-function duplicateEncode(word){
-    var str = "";
-     w = word.toLowerCase();
-    for(let i = 0; i < w.length; i ++)
-    {
-      if(w.indexOf(w[i]) === w.lastIndexOf(w[i]))
-      {
-        str += '(';
-      } else str += ')';
-    
-    }
+function iqTest(numbers){
+  var num = numbers.replace( /^\D+/g, '');
+  var num = num.split(" ").map((current) =>
+  {
+    return parseInt(current);
+  });
 
-    return str;
+  var odd = [];
+  var even = [];
+
+  for(let i = 0; i < num.length; i++)
+  {
+    num[i] % 2 === 0 ? even.push(num[i]) : odd.push(num[i]);
+  }
+
+  if(odd.length === 1)
+  {
+    return(num.indexOf(odd[0]) + 1);
+  } else return num.indexOf(even[0]) + 1;
+  
+
 }
 
 
