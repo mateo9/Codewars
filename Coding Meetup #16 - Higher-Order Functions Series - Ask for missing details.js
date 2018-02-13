@@ -1,52 +1,45 @@
 /* 
-You will be given an array of objects representing data about developers who have signed up to attend
- the next coding meetup that you are organising.
+You will be given an array of objects representing data about developers who have signed up to
+attend the next web development meetup that you are organising. Three programming languages will
+be represented: Python, Ruby and JavaScript.
 
-Given the following input array:
+Your task is to return either:
 
-var list1 = [
-{ firstName: null, lastName: 'I.', country: 'Argentina', continent: 'Americas',
- age: 35, language: 'Java' },
-{ firstName: 'Lukas', lastName: 'X.', country: 'Croatia', continent:
- 'Europe', age: 35, language: null },
-{ firstName: 'Madison', lastName: 'U.', country: 'United States', continent: 'Americas',
- age: 32, language: 'Ruby' } 
-];
-
-write a function that
-
-1) adds the question property to each object in the input array where the developer has not provided
- the relevant details (marked with a null value). The value of the question property should be the
-  following string:
-
-Hi, could you please provide your <property name>.
+    true if the number of meetup participants representing any of the three programming languages is
+    at most 2 times higher than the number of developers representing any of the remaining
+    programming languages; 
+    false otherwise.
 
 Notes:
 
-    At most only one of the values will be null.
-    Preserve the order of the original list.
-    Return an empty array [] if there is no developer with missing details.
-    The input array will always be valid and formatted as in the example above. 
-
+    The strings representing all three programming languages will always be formatted in
+    the same way (e.g. 'JavaScript' will always be formatted with upper-case 'J' and 'S'.
+    The input array will always be valid and formatted as in the example above.
+    Each of the 3 programming languages will always be represented. 
 
 
 */
 
-function askForMissingDetails(list) {
+function isLanguageDiverse(list) {
   
-  for(var i = 0; i < list.length; i++) {
-  	for(var x in list[i]) {
-  		if(list[i][x] === null) {
-  			list[i].question = `Hi, could you please provide your ${x}.`;
-  		} 
-  	}
+  var test = list.reduce(function(acc,current) {
+     acc[current.language] = (acc[current.language] || 0) + 1;
+     return acc;
+  },{});
+  
+  var max;
+  var min;
+  var arr = new Array();
+  for(x in test) {
+     arr.push(test[x]);
   }
 
- var test = list.filter(function(current){
- 	return current.hasOwnProperty('question');
- });
-
- return (test);
+  max = Math.max.apply(null, arr);
+  min = Math.min.apply(null, arr);
   
-
+  if(max /min > 2) {
+  	return false;
+  } else {
+  	return true;
+  }
 }
