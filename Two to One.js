@@ -1,39 +1,31 @@
 /* 
 
-Program channels into your TV's memory. An array with channels (strings) will be passed as an
-argument to the function redarr(). Sort the channels in an alphabetical order, remove duplicates
-and, finally, return an object where each channel (object's value) is assigned to a whole number
-(objects's key), starting with 0.
+Take 2 strings s1 and s2 including only letters from ato z. Return a new sorted string, the longest possible, containing
+distinct letters, each taken only once - coming from s1 or s2.
 
-Examples:
+#Examples: ``` a = "xyaabbbccccdefww" b = "xxxxyyyyabklmopq" longest(a, b) -> "abcdefklmopqwxy"
 
-var arr = ["BBC1", "BBC2", "MTV"];
-
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
-
-var arr = ["BBC1", "BBC1", "BBC2", "MTV"];
-
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
+a = "abcdefghijklmnopqrstuvwxyz" longest(a, a) -> "abcdefghijklmnopqrstuvwxyz" ```
 
 
 */
 
 
-function redarr(arr) {
+function longest(s1, s2) {
+ var arr = [];
+ for(var i = 0; i < s1.length; i++) {
+ 	if(arr.indexOf(s1[i]) === -1) {
+ 		arr.push(s1[i]);
+ 	}
+ }
 
-var a = [];
-var obj = {};
- a = arr.filter((current,index,array) => {
-	return arr.indexOf(current) == index;
-});
-a.sort();
-obj = a.reduce((acc,current,index,array) => {
-    acc[index] = current;
-    return acc;
-},obj);
+ for(var j = 0; j < s2.length; j++) {
+ 	if(arr.indexOf(s2[j]) === -1) {
+ 		arr.push(s2[j]);
+ 	}
+ }
+ arr.sort();
+ var s3 = arr.join("");
 
-
-return obj;
-
+ return (s3);
 }
-
