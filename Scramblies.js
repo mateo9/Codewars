@@ -1,32 +1,28 @@
 /* 
-  The goal of this exercise is to convert a string to a new string where each
-  character in the new string is '(' if that character appears only once in the original string, or ')' if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+Write function scramble(str1,str2) that returns true if a portion of str1 characters can be rearranged to match str2,
+otherwise returns false.
 
-Examples:
+For example:
+str1 is 'rkqodlw' and str2 is 'world' the output should return true.
+str1 is 'cedewaraaossoqqyt' and str2 is 'codewars' should return true.
+str1 is 'katas' and str2 is 'steak' should return false.
 
-"din" => "((("
+Only lower case letters will be used (a-z). No punctuation or digits will be included.
+Performance needs to be considered
 
-"recede" => "()()()"
-
-"Success" => ")())())"
-
-"(( @" => "))((" 
 */
 
 
-function duplicateEncode(word){
-    var str = "";
-     w = word.toLowerCase();
-    for(let i = 0; i < w.length; i ++)
-    {
-      if(w.indexOf(w[i]) === w.lastIndexOf(w[i]))
-      {
-        str += '(';
-      } else str += ')';
-    
+function scramble(str1, str2) {
+    var array1 = str1.split("").sort();
+    var array2 = str2.split("").sort();
+    var i = 0;
+    for(var x = 0; i<array2.length && x<=array1.length; x++) {
+        if(array2[i] === array1[x]) {
+            i++;
+        }
     }
-
-    return str;
+    return (x <= array1.length);
 }
 
 
