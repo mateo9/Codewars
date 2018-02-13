@@ -1,39 +1,41 @@
 /* 
 
-Program channels into your TV's memory. An array with channels (strings) will be passed as an
-argument to the function redarr(). Sort the channels in an alphabetical order, remove duplicates
-and, finally, return an object where each channel (object's value) is assigned to a whole number
-(objects's key), starting with 0.
+Implement the function unique_in_order which takes as argument a sequence and returns a list of items without
+any elements with the same value next to each other and preserving the original order of elements.
 
-Examples:
+For example:
 
-var arr = ["BBC1", "BBC2", "MTV"];
+uniqueInOrder('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
+uniqueInOrder('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
+uniqueInOrder([1,2,2,3,3])       == [1,2,3]
 
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
-
-var arr = ["BBC1", "BBC1", "BBC2", "MTV"];
-
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
 
 
 */
 
 
-function redarr(arr) {
+var uniqueInOrder=function(iterable){
+  if(typeof iterable === 'string') {
+  	var arr = new Array();
+	  
+  	var arr = iterable.split("").filter(function(current,index,a)  {
+        if(a[index] !== a[index +1]) {
+     	return arr.push(a[index]);
+     }
+  	});
+  	
+  	 return arr;
+  }   
 
-var a = [];
-var obj = {};
- a = arr.filter((current,index,array) => {
-	return arr.indexOf(current) == index;
-});
-a.sort();
-obj = a.reduce((acc,current,index,array) => {
-    acc[index] = current;
-    return acc;
-},obj);
-
-
-return obj;
-
+  else {
+  	var arr1 = new Array();
+	  
+  	var arr1 = iterable.filter(function(current,index,a)  {
+        if(a[index] !== a[index +1]) {
+     	  return arr1.push(a[index]);
+           }
+  	});
+  	
+  	 return arr1;
+  }
 }
-
