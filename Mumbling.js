@@ -1,39 +1,31 @@
 /* 
 
-Program channels into your TV's memory. An array with channels (strings) will be passed as an
-argument to the function redarr(). Sort the channels in an alphabetical order, remove duplicates
-and, finally, return an object where each channel (object's value) is assigned to a whole number
-(objects's key), starting with 0.
+This time no story, no theory. The examples below show you how to write function accum:
 
 Examples:
 
-var arr = ["BBC1", "BBC2", "MTV"];
+accum("abcd");    // "A-Bb-Ccc-Dddd"
+accum("RqaEzty"); // "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+accum("cwAt");    // "C-Ww-Aaa-Tttt"
 
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
+The parameter of accum is a string which includes only letters from a..z and A..Z.
 
-var arr = ["BBC1", "BBC1", "BBC2", "MTV"];
-
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
 
 
 */
 
 
-function redarr(arr) {
-
-var a = [];
-var obj = {};
- a = arr.filter((current,index,array) => {
-	return arr.indexOf(current) == index;
-});
-a.sort();
-obj = a.reduce((acc,current,index,array) => {
-    acc[index] = current;
-    return acc;
-},obj);
-
-
-return obj;
-
+function accum(s) {
+ 
+ var str = '';
+ for(var i = 0; i < s.length; i++) {
+ 	if(s.charAt(i) === s.charAt(i).toLowerCase()) {
+    str = str + s.charAt(i).toUpperCase() + s.charAt(i).repeat(i) + '-';
+    } else if(s.charAt(i) === s.charAt(i).toUpperCase()) {
+    	str = str + s.charAt(i) + s.charAt(i).repeat(i).toLowerCase() + '-';
+    }
+ }
+  var test = str.split("").slice(0,-1).join("");
+  return test;
 }
 
