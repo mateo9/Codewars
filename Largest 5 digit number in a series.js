@@ -1,32 +1,38 @@
 /* 
-  The goal of this exercise is to convert a string to a new string where each
-  character in the new string is '(' if that character appears only once in the original string, or ')' if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+In the following 10 digit number:
 
-Examples:
+1234567890
 
-"din" => "((("
+67890 is the greatest sequence of 5 digits.
 
-"recede" => "()()()"
+Complete the solution so that it returns the largest five digit number found within the number given.
+The number will be passed in as a string of only digits. It should return a five digit integer. The number passed may
+be as large as 1000 digits. 
 
-"Success" => ")())())"
-
-"(( @" => "))((" 
 */
 
 
-function duplicateEncode(word){
-    var str = "";
-     w = word.toLowerCase();
-    for(let i = 0; i < w.length; i ++)
-    {
-      if(w.indexOf(w[i]) === w.lastIndexOf(w[i]))
-      {
-        str += '(';
-      } else str += ')';
-    
-    }
+function solution(digits){
+  var arr = digits.split('');
+  var tem = 0;
+  var test = [];
+  arr.forEach((current,index,array) => {
+     if(current >= tem)
+     {
+     	tem = current;
+     	var a = array.slice(index,index + 5).join('');
+        test.push(parseInt(a));
+     } 
+  });
 
-    return str;
+  function sortNumber(a,b)
+  {
+    return b - a;
+  }
+
+  test.sort(sortNumber);
+  var results = test[0];
+  return results;
+
 }
-
 
