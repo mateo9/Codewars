@@ -1,39 +1,67 @@
 /* 
 
-Program channels into your TV's memory. An array with channels (strings) will be passed as an
-argument to the function redarr(). Sort the channels in an alphabetical order, remove duplicates
-and, finally, return an object where each channel (object's value) is assigned to a whole number
-(objects's key), starting with 0.
+You are going to be given an array of integers. Your job is to take that array and find an index N where the sum
+of the integers to the left of N is equal to the sum of the integers to the right of N. If there is no index that
+would make this happen, return -1.
 
-Examples:
+For example:
 
-var arr = ["BBC1", "BBC2", "MTV"];
+Let's say you are given the array {1,2,3,4,3,2,1}:
+Your function will return the index 3, because at the 3rd position of the array, the sum of left side of the
+index ({1,2,3}) and the sum of the right side of the index ({3,2,1}) both equal 6.
 
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
+Let's look at another one.
+You are given the array {1,100,50,-51,1,1}:
+Your function will return the index 1, because at the 1st position of the array, the sum of left side of the index
+({1}) and the sum of the right side of the index ({50,-51,1,1}) both equal 1.
 
-var arr = ["BBC1", "BBC1", "BBC2", "MTV"];
+Last one:
+You are given the array {20,10,-80,10,10,15,35}
+At index 0 the left side is {}
+The right side is {10,-80,10,10,15,35}
+They both are equal to 0 when added. (Empty arrays are equal to 0 in this problem)
+Index 0 is the place where the left side and right side are equal.
 
-redarr(arr) // returns {"0":"BBC1", "1":"BBC2", "2":"MTV"}
+Note: Please remember that in most programming/scripting languages the index of an array starts at 0.
 
+Input:
+An integer array of length 0 < arr < 1000. The numbers in the array can be any integer positive or negative.
+
+Output:
+The lowest index N where the side to the left of N is equal to the side to the right of N. If you do not find an index
+that fits these rules, then you will return -1.
+
+Note:
+If you are given an array with multiple answers, return the lowest correct index.
+An empty array should be treated like a 0 in this problem.
 
 */
 
 
-function redarr(arr) {
+function findEvenIndex(arr)
+{ 
+    var sum1 = 0;
+    var sum2 = 0;
+    var arr1 = [];
+    var arr2 = [];
+   
+  for(var i = 0; i < arr.length; i++) {
+  		arr1 = arr.slice(0,i);
+  		arr2 = arr.slice(i+1, arr.length);
+  	sum1 = arr1.reduce(function(acc, current) {
+  		return acc + current;
+  	},0);
 
-var a = [];
-var obj = {};
- a = arr.filter((current,index,array) => {
-	return arr.indexOf(current) == index;
-});
-a.sort();
-obj = a.reduce((acc,current,index,array) => {
-    acc[index] = current;
-    return acc;
-},obj);
+  	sum2 = arr2.reduce(function(acc, current) {
+  		return acc + current;
+  	},0);
 
-
-return obj;
-
+  	if(sum1 === sum2) {
+  		return (i);
+  	}else if(i === (arr.length - 1) && sum1 !== sum2) {
+  		return -1;
+  	}
+  }
+  
 }
 
